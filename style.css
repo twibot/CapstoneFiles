@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #242333;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+}
+
+.parking-container {
+  margin: 20px 0;
+}
+
+.parking-container select {
+  background-color: #fff;
+  border: 0;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-left: 10px;
+  padding: 5px 15px 5px 15px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.container {
+  perspective: 1000px;
+  margin-bottom: 30px;
+}
+
+.parking_spots {
+  background-color: #444451 ;
+  height: 25px;
+  width: 20px;
+  margin: 3px;
+}
+.parking_spots_1 {
+  background-color: #242333 ;
+  height: 5px;
+  width: 20px;
+  margin: 3px;
+}
+
+
+.parking_spots.selected 
+{
+  background-color: #6feaf6;
+}
+
+.parking_spots.reserved
+{
+  background-color: blue;
+}
+
+.parking_spots.occupied 
+{
+  background-color: red;
+}
+
+/* .parking_spots:nth-of-type(2) {
+  margin-right: 18px;
+}
+
+.parking_spots:nth-last-of-type(2) {
+  margin-left: 18px;
+} */
+
+.parking_spots:not(.occupied):hover {
+  cursor: pointer;
+  transform: scale(1.5);
+}
+
+.showcase .parking_spots:not(.occupied):hover {
+  cursor: default;
+  transform: scale(1);
+}
+
+.showcase {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #777;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.showcase li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+}
+
+.showcase li small {
+  margin-left: 2px;
+}
+
+.row {
+  display: flex;
+}
+
+.building {
+  background-color: grey;
+  height: 70px;
+  width: 100%;
+  margin: 15px 0;
+  text-align: center;
+}
+
+p.text {
+  margin: 5px 0;
+}
+
+p.text span {
+  color: #6feaf6;
+}

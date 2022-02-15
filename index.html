@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Smart Parking System</title>
+  </head>
+  <body>
+   
+    <!-- This section is the container to select the parking lot, the user has to option to select 
+    from the different parking lots THE VARIABLES NEEDS TO BE CHANGED -->
+    <div class="parking-container">
+      <label>Select a parking lot</label>
+      <select id="Parking_lot">
+        <option value="Yes">University of Regina Parking Lot</option>
+        <option value="Yes">Prototype Testing Parking Lot</option>
+      </select>
+    </div>
+
+    <!-- This section is the legends under the parking lot selection. This displays the possible 
+    statuses of the parking spots, Available (White), Occupied (Red), Reserved (Cyan)-->
+    <ul class="showcase">
+      <li>
+        <div class="parking_spots"></div>
+        <small>Available</small>
+      </li>
+      <li>
+        <div class="parking_spots occupied"></div>
+        <small>Occupied</small>
+      </li>
+      <li>
+        <div class="parking_spots reserved"></div>
+        <small>Reserved</small>
+      </li>
+      
+      <li>
+        <div class="parking_spots selected"></div>
+        <small>Selected</small>
+      </li>
+    </ul>
+
+      <!-- This section contains the building for orientation and the parking spots along with their
+      status -->
+    <div class="container">
+      <div class="building"> Reference Building </div>
+
+      <div class="row">
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+      </div>
+      
+      <div class="row">
+        <div class="parking_spots_1"></div>
+        <div class="parking_spots_1"></div>
+        <div class="parking_spots_1"></div>
+        <div class="parking_spots_1"></div>
+        <div class="parking_spots_1"></div>
+        <div class="parking_spots_1"></div>
+        <div class="parking_spots_1"></div>
+        <div class="parking_spots_1"></div>
+        <div class="parking_spots_1"></div>
+        <div class="parking_spots_1"></div>
+      </div>
+
+      <div class="row">
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+      </div>
+      
+      <div class="row">
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots"></div>
+        <div class="parking_spots occupied"></div>
+        <div class="parking_spots"></div>
+      </div>
+    </div>
+
+    <!-- This section includes the varification of the parking spot and asking the user what they wish to do -->
+    <p class="text">
+      <span class="textquestion"></span> 
+      <button type="submit">Reserve</button>
+      <!-- Would you like to reserve the spot?  -->
+      <span></span>
+    </p>
+
+    <script src="script.js" type="text/javascript"></script>
+  </body>
+</html>
