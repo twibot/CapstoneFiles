@@ -1,5 +1,5 @@
-# Capstone-Webite
-Website Coding for Capstone
+# Capstone
+All Files for Capstone
 
 Enter Files here
 Filename - Description
