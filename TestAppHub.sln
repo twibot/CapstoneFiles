@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TestAppHub", "TestAppHub.pyproj", "{7F2EEBB9-1F56-4E24-8E69-DB6195806642}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F2EEBB9-1F56-4E24-8E69-DB6195806642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F2EEBB9-1F56-4E24-8E69-DB6195806642}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B22F4B7B-CFD7-41C0-97D8-E405A6E5997A}
+	EndGlobalSection
+EndGlobal
