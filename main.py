@@ -1,7 +1,8 @@
-from machine import
+from machine import Pin, UART, RTC
 from hcsr04 import HCSR04
-from init import initialization
-from local import localDetection, webtodevice
+from functions import *
+
+
 
 initialization()
 
