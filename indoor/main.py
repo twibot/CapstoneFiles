@@ -20,7 +20,7 @@ US1 = HCSR04(trigger_pin=13, echo_pin=14, echo_timeout_us=10000)
 US2 = HCSR04(trigger_pin=23, echo_pin=22, echo_timeout_us=10000)
 
 #Sets up UART Protocol to variable uart1, Baudrate = 9600, Transmitter Pin (26), Receiver Pin (27)
-uart1 = UART(1, baudrate=9600, tx=26, rx=27)
+uart1 = UART(1, baudrate=9600, tx=27, rx=26)
     
 #Sets up the real time clock
 rtc = RTC()
@@ -38,11 +38,10 @@ def localDetection():
     #Checks if object is there, returns value and prints it if object is there
     USdistance_1 = US1.distance_cm()
     print('Ultrasonic Sensor 1: ', USdistance_1, ' cm')
-    timestamp = rtc.datetime()
-    timestamp = str(timestamp)
-    timestamp1 = ubinascii.hexlify(timestamp)
-    #delay of 1 second.
-    sleep(1)
+    #timestamp = rtc.datetime()
+    #timestamp = str(timestamp)
+    #timestamp1 = ubinascii.hexlify(timestamp)
+    
     #Checks if the distance to object is within 10 cm using Ultrasonic Sensor 1
     if USdistance_1 < 10:
         
@@ -67,7 +66,6 @@ def localDetection():
             #Ensures other LED Colors are off and turns on the red LED
             ledGreen.value(0)
             ledBlue.value(0)
-            sleep(1)
             ledRed.value(1)
             
             #Sends to xbee chip the message occupied and timestamp
@@ -79,7 +77,6 @@ def localDetection():
             #If is a false positive, the red and blue LED is turned off and green is turned on
             ledRed.value(0)
             ledBlue.value(0)
-            sleep(1)
             ledGreen.value(1)
             print('False Reading, Parking spot is free')
     
@@ -87,7 +84,6 @@ def localDetection():
     else:
         ledRed.value(0)
         ledBlue.value(0)
-        sleep(1)
         ledGreen.value(1)
         uart1.write('ia')
         #uart1.write(timestamp1)
@@ -99,7 +95,6 @@ def webtodevice():
     message = uart1.read()
     if message == response:
         ledGreen.value(0)
-        sleep(1)
         ledBlue.value(1)
         print('Someone Reserved the spot Online!')
             
@@ -118,7 +113,7 @@ def webtodevice():
 while True:
     localDetection()
     webtodevice()
-    print('currently in 15 second sleep timer')
-    sleep(15)
+    sleep(1)
 
     
+
