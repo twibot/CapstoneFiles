@@ -20,15 +20,15 @@ US1 = HCSR04(trigger_pin=13, echo_pin=14, echo_timeout_us=10000)
 US2 = HCSR04(trigger_pin=23, echo_pin=22, echo_timeout_us=10000)
 
 #Sets up UART Protocol to variable uart1, Baudrate = 9600, Transmitter Pin (26), Receiver Pin (27)
-uart1 = UART(1, baudrate=9600, tx=27, rx=26)
+uart1 = UART(1, baudrate=9600, tx=26, rx=27)
     
 #Sets up the real time clock
 rtc = RTC()
 rtc.init((2022,3,2,1,30,0,0,0))
 
     
-#Variable 'response' is holding a byte called 'ir' (Reserved)
-response = ubinascii.unhexlify('6972')
+#Variable 'response' is holding a byte called 'InRs' (Reserved)
+response = ubinascii.unhexlify('496e5273')
 
 #Turns on Green Led indicator initially to display parking spot is available
 ledGreen.value(1)
@@ -69,7 +69,7 @@ def localDetection():
             ledRed.value(1)
             
             #Sends to xbee chip the message occupied and timestamp
-            uart1.write('io')
+            uart1.write('InOc')
             #uart1.write(timestamp1)
             print('Vehicle is detected, parking spot occupied')
             
@@ -85,7 +85,7 @@ def localDetection():
         ledRed.value(0)
         ledBlue.value(0)
         ledGreen.value(1)
-        uart1.write('ia')
+        uart1.write('InEm')
         #uart1.write(timestamp1)
         print('No Vehicles Detected')
 
@@ -114,6 +114,3 @@ while True:
     localDetection()
     webtodevice()
     sleep(1)
-
-    
-
