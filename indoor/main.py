@@ -27,8 +27,8 @@ rtc = RTC()
 rtc.init((2022,3,2,1,30,0,0,0))
 
     
-#Variable 'response' is holding a byte called 'InRs' (Reserved)
-response = ubinascii.unhexlify('496e5273')
+#Variable 'response' is holding a byte called 'Rs' (Reserved)
+response = ubinascii.unhexlify('5273')
 
 #Turns on Green Led indicator initially to display parking spot is available
 ledGreen.value(1)
@@ -69,7 +69,7 @@ def localDetection():
             ledRed.value(1)
             
             #Sends to xbee chip the message occupied and timestamp
-            uart1.write('InOc')
+            uart1.write('Oc')
             #uart1.write(timestamp1)
             print('Vehicle is detected, parking spot occupied')
             
@@ -78,6 +78,7 @@ def localDetection():
             ledRed.value(0)
             ledBlue.value(0)
             ledGreen.value(1)
+            uart1.write('Av')
             print('False Reading, Parking spot is free')
     
     #If sensor does not detect anything, ensure other LED is off and Green LED is turned back on, sends 'available' to hub
@@ -85,7 +86,7 @@ def localDetection():
         ledRed.value(0)
         ledBlue.value(0)
         ledGreen.value(1)
-        uart1.write('InEm')
+        uart1.write('Av')
         #uart1.write(timestamp1)
         print('No Vehicles Detected')
 
@@ -114,3 +115,4 @@ while True:
     localDetection()
     webtodevice()
     sleep(1)
+
