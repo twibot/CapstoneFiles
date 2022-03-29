@@ -7,12 +7,12 @@ import utime
 led = Pin(25, Pin.OUT)
 trigger = Pin(3, Pin.OUT)
 echo = Pin(2, Pin.IN)
-signal_out = Pin(4, Pin.OUT)
-xbee_out = Pin(5, Pin.OUT)
+#signal_out = Pin(4, Pin.OUT)
+#xbee_out = Pin(5, Pin.OUT)
 
 dis = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 parking_dist = 110
-uart = machine.UART(0, baudrate = 9600)
+uart1 = machine.UART(0, baudrate = 9600, tx=5 , rx=4 )
 
 
 def ultra():
@@ -42,6 +42,9 @@ while True:
 
    if avg < parking_dist:
        print("Send Signal")
+       uart1.write('Oc')
+   else
+       uart1.write('Av')
        
    led.off()
    utime.sleep(15)
