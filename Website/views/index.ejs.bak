@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheets/style.css" type = "text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Smart Parking System</title>
+  </head>
+  <body>
+   
+    <!-- This section is the container to select the parking lot, the user has to option to select 
+    from the different parking lots  -->
+    <div class="parking-container">
+      <label>Select a parking lot</label>
+      <select id="Parking_lot">
+        <option value="Yes">Prototype Testing Parking Lot</option>
+        <option value="Yes">University of Regina Parking Lot</option>
+      </select>
+    </div>
+
+    <!-- This section is the legends under the parking lot selection. This displays the possible 
+    statuses of the parking spots, Available (White), Occupied (Red), Reserved (Cyan)-->
+    <ul class="showcase">
+      <li>
+        <div class="parking_spots"></div>
+        <small>Available</small>
+      </li>
+      <li>
+        <div class="parking_spots occupied"></div>
+        <small>Occupied</small> 
+      </li>
+      <li>
+        <div class="parking_spots reserved"></div>
+        <small>Reserved</small>
+      </li>
+      
+      <li>
+        <div class="parking_spots selected"></div>
+        <small>Selected</small>
+      </li>
+    </ul>
+    
+
+
+      <!-- This section contains the building for orientation and the parking spots along with their
+      status -->
+    <div class="container">
+      <div class="building"> Reference Building </div>
+
+      <div class="row">
+<!--         <div class="parking_spots_1"></div>
+        <div class="parking_spots_1"></div>
+        <div class="parking_spots_1"></div> -->
+
+	
+		<% lots.forEach(function(element, index) { %>
+			<% if (element.Sensor_State == 'R'){ %>
+			<div class="parking_slot reserved" id = "<%= element.Sensor_ID %>" ></div>
+			<% } %>
+			<% if (element.Sensor_State == 'O'){ %>
+			<div class="parking_slot occupied" id = "<%= element.Sensor_ID %>" ></div>
+			<% } %>
+			<% if (element.Sensor_State == 'A'){ %>
+			<div class="parking_slot"  id = "<%= element.Sensor_ID %>"></div>
+			<% } %>
+		<% }) %>
+
+
+
+
+
+		
+      </div>
+
+
+
+    </div>
+
+    <!-- This section includes the reserve button on the bottom of the page, for the user to reserve parking spots -->
+    <div>
+      <p>
+<!-- 		<form action = "/update" id = "pushbutton">  -->
+        <input  class = "buttons" value = "Reserve" type = "submit" id = "pushbutton">
+<!-- 		</form> -->
+      </p>
+    </div>
+
+    <ul class="showcase">
+     <p>The number of available parking spaces are:  </p>
+	 <p> <%= count %></p>
+    </ul>
+ 
+
+    <script src="javascripts/script.js" type="text/javascript"></script>
+  </body>
+</html>
