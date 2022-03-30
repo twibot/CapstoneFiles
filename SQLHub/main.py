@@ -122,7 +122,12 @@ def FormatTime(tuple, PS_ID):
         print("Something's not quite right...")
         data = "0"
 
-    print("This is for the ", str, " device.")
+    if PS_ID == "00:13:A2:00:41:A0:49:8A":
+        str = "Indoor"
+    elif PS_ID == "00:13:A2:00:41:B5:F7:07":
+        str = "Outdoor"
+
+    print("This is for the", str, "device.")
     print("Timestamp:", TimeYMD, " at ", TimeP)
     print("This is the converted data: ", data)
 
@@ -165,28 +170,33 @@ def commit_sql(Va, Vb, Vc, x, wack):
     CommitStatement = ''.join(CommitStatement)
 
     if 'Rs' in x:
-        print("This spot is reserved. Sending reserved signal out instead of updating MySQL.")
+        print("This spot is reserved. Sending reserved signal out towards to the device for 4 seconds.")
         Obj = dc.get_connection()
-        print("Ping is: ", Obj.ping())  # Shows the ping for the response
+        # print("Ping is: ", Obj.ping())  # Shows the ping for the response
+
         if '00:13:A2:00:41:A0:49:8A' in wack:
-            Obj.post("/ws/sci", InMes)
+            for Tz in range(8):
+                Obj.post("/ws/sci", InMes)
+                print("Sending Rs Message...Iteration:", Tz)
+                time.sleep(.5)
         elif '00:13:A2:00:41:B5:F7:07' in wack:
-            Obj.post("/ws/sci", OutMes)
-    else:
+            for Tz in range(8):
+                Obj.post("/ws/sci", OutMes)
+                print("Sending Rs Message...Iteration:", Tz)
+                time.sleep(.5)
 
-        myCursor.execute(CommitStatement, values)
+    myCursor.execute(CommitStatement, values)
+    myDB.commit()
+    print("Updating MySQL Record")
 
-        myDB.commit()
-        print("Record Inserted...")
-
-        return
+    return
 
 
 while 1:
     # Acquires the separate streams that are currently operating at the beginning of the loop
     # The various PRINT statements are used for testing purposes
     print("-----------------------------------------------------------------------------------------------------------")
-    time.sleep(3)  # Give the code a moment to breathe, since the data stream on the gateway only updates every ~5 seconds, we give it a 3 second sleep timer
+    # time.sleep(3)  # Give the code a moment to breathe, since the data stream on the gateway only updates every ~5 seconds, we give it a 3 second sleep timer
     print("Instance :", Count1)
     Count1 += 1
 
