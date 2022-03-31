@@ -7,12 +7,12 @@ import utime
 led = Pin(25, Pin.OUT)
 trigger = Pin(3, Pin.OUT)
 echo = Pin(2, Pin.IN)
-#signal_out = Pin(4, Pin.OUT)
-#xbee_out = Pin(5, Pin.OUT)
+xbee_out = Pin(4, Pin.OUT, Pin.PULL_DOWN)
+xbee_in = Pin(5, Pin.OUT, Pin.PULL_DOWN)
 
 dis = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 parking_dist = 110
-uart1 = machine.UART(0, baudrate = 9600, tx=5 , rx=4 )
+uart1 = machine.UART(0, baudrate = 9600, tx=Pin(0) , rx=Pin(1) )
 
 
 def ultra():
@@ -31,25 +31,25 @@ def ultra():
    
 while True:
    led.on()
+
    utime.sleep(2)
    sum = 0
    for x in range(10):
        dis[x] = ultra()
        utime.sleep(2)
-       print(dis)
        sum = sum + dis[x]
    avg = sum / 10
-
+   print(avg)
+   utime.sleep(6)
    if avg < parking_dist:
-       print("Send Signal")
-       uart1.write('Oc')
-   else
-       uart1.write('Av')
+      uart1.write('Oc')
+   else:
+      uart1.write('Av')
        
    led.off()
-   utime.sleep(15)
+   utime.sleep(2)
 
    
-   picosleep.seconds(180)
+#    picosleep.seconds(60)
    utime.sleep(3)
   
