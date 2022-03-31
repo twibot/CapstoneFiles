@@ -49,19 +49,15 @@
       <div class="building"> Reference Building </div>
 
       <div class="row">
-<!--         <div class="parking_spots_1"></div>
-        <div class="parking_spots_1"></div>
-        <div class="parking_spots_1"></div> -->
-
 	
 		<% lots.forEach(function(element, index) { %>
-			<% if (element.Sensor_State == 'R'){ %>
+			<% if (element.Sensor_State == 'Rs'){ %>
 			<div class="parking_slot reserved" id = "<%= element.Sensor_ID %>" ></div>
 			<% } %>
-			<% if (element.Sensor_State == 'O'){ %>
+			<% if (element.Sensor_State == 'Oc'){ %>
 			<div class="parking_slot occupied" id = "<%= element.Sensor_ID %>" ></div>
 			<% } %>
-			<% if (element.Sensor_State == 'A'){ %>
+			<% if (element.Sensor_State == 'Av'){ %>
 			<div class="parking_slot"  id = "<%= element.Sensor_ID %>"></div>
 			<% } %>
 		<% }) %>

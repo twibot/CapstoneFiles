@@ -65,15 +65,8 @@
 			<div class="parking_slot"  id = "<%= element.Sensor_ID %>"></div>
 			<% } %>
 		<% }) %>
-
-
-
-
-
 		
       </div>
-
-
 
     </div>
 

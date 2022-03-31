@@ -5,10 +5,7 @@ var db=require('../database');
 router.get('/update', function(req, res, next){
 	
 	var id = req.query.psid;
-	console.log("id: "+ id);
-
-	var sql3='UPDATE sensor SET Sensor_State = "R" WHERE Sensor_ID = '+ id;
-	console.log(sql3);
+	var sql3='UPDATE sensor SET Sensor_State = "Rs" WHERE Sensor_ID = '+ id;
 	db.query(sql3, function (err, data) {
 		if (err) throw err;
 	});
@@ -16,7 +13,7 @@ router.get('/update', function(req, res, next){
 });
 
 router.get('/index', function(req, res, next) {
-    var sql='SELECT COUNT(*) AS count FROM sensor WHERE Sensor_State = "A"';
+    var sql='SELECT COUNT(*) AS count FROM sensor WHERE Sensor_State = "Av"';
 	var sql2='SELECT * FROM sensor';
 	let count
     db.query(sql, function (err, data) {
