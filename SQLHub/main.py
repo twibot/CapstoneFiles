@@ -2,7 +2,7 @@ from devicecloud import DeviceCloud
 import mysql.connector
 import base64
 import time
-import pandas as pd
+# import pandas as pd
 
 UserN = "jakenardo@gmail.com"
 PassW = "Apples123"
@@ -68,9 +68,9 @@ OutMes = """<sci_request version="1.0">
 try:
     myDB = mysql.connector.connect(
         host="localhost",  # Hostname of the MySQL database
-        user="Jake",  # Enter your username here
-        password="Apples123",  # Enter your password here
-        database="testschema"
+        user="root",  # Enter your username here
+        password="Regina123",  # Enter your password here
+        database="schema 1"
     )
     print("== Connected to Database ==")
     print(myDB)  # Shows connected Database
@@ -103,7 +103,7 @@ except:
 Count1 = 1
 
 
-def FormatTime(tuple, PS_ID):
+def FormatTime(tuple, Sensor_ID):
     xbeeD = tuple.split("'")  # Big block to convert the information required into the form we need it in
     xbeeT = tuple.split("(")  # Isolates the Timestamp, and the DATA stream, to show us what we need
     Data = xbeeD[1]
@@ -122,18 +122,18 @@ def FormatTime(tuple, PS_ID):
         print("Something's not quite right...")
         data = "0"
 
-    if PS_ID == "00:13:A2:00:41:A0:49:8A":
+    if Sensor_ID == "00:13:A2:00:41:A0:49:8A":
         str = "Indoor"
-    elif PS_ID == "00:13:A2:00:41:B5:F7:07":
+    elif Sensor_ID == "00:13:A2:00:41:B5:F7:07":
         str = "Outdoor"
 
     print("This is for the", str, "device.")
     print("Timestamp:", TimeYMD, " at ", TimeP)
     print("This is the converted data: ", data)
 
-    if PS_ID == "00:13:A2:00:41:A0:49:8A":
+    if Sensor_ID == "00:13:A2:00:41:A0:49:8A":
         ID = 1
-    elif PS_ID == "00:13:A2:00:41:B5:F7:07":
+    elif Sensor_ID == "00:13:A2:00:41:B5:F7:07":
         ID = 2
     else:
         ID = 0
@@ -166,7 +166,7 @@ def commit_sql(Va, Vb, Vc, x, wack):
     # Commit statement that commits into the table the values that we currently have, in format PS_ID, PS_DT, PS_ST
     # Where PS_ID is Parking Spot ID, PS_DT is Date/time, and PS_ST is Parking Spot State
     values = (Va, Vb, Vc)
-    CommitStatement = "REPLACE INTO ", t[0].strip("'"), " (PS_ID, PS_DT, PS_ST) VALUES (%s, %s, %s)"
+    CommitStatement = "REPLACE INTO ", t[0].strip("'"), " (Sensor_ID, Timestamp, Sensor_State) VALUES (%s, %s, %s)"
     CommitStatement = ''.join(CommitStatement)
 
     if 'Rs' in x:
@@ -175,12 +175,12 @@ def commit_sql(Va, Vb, Vc, x, wack):
         # print("Ping is: ", Obj.ping())  # Shows the ping for the response
 
         if '00:13:A2:00:41:A0:49:8A' in wack:
-            for Tz in range(8):
+            for Tz in range(4):
                 Obj.post("/ws/sci", InMes)
                 print("Sending Rs Message...Iteration:", Tz)
                 time.sleep(.5)
         elif '00:13:A2:00:41:B5:F7:07' in wack:
-            for Tz in range(8):
+            for Tz in range(4):
                 Obj.post("/ws/sci", OutMes)
                 print("Sending Rs Message...Iteration:", Tz)
                 time.sleep(.5)
@@ -196,7 +196,7 @@ while 1:
     # Acquires the separate streams that are currently operating at the beginning of the loop
     # The various PRINT statements are used for testing purposes
     print("-----------------------------------------------------------------------------------------------------------")
-    # time.sleep(3)  # Give the code a moment to breathe, since the data stream on the gateway only updates every ~5 seconds, we give it a 3 second sleep timer
+    time.sleep(3)  # Give the code a moment to breathe, since the data stream on the gateway only updates every ~5 seconds, we give it a 3 second sleep timer
     print("Instance :", Count1)
     Count1 += 1
 
