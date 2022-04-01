@@ -50,6 +50,11 @@ body {
   margin: 3px;
 }
 
+.parking_number {
+	width: 20px;
+	
+}
+
 .parking_spots_1 {
   background-color: #242333 ;
   height: 5px;
@@ -78,10 +83,10 @@ body {
   transform: scale(1.5);
 }
 
-/* .showcase .parking_slot:not(.occupied):hover {
+.showcase .parking_slot:not(.occupied):hover {
   cursor: default;
   transform: scale(1);
-} */
+}
 
 .showcase {
   background: rgba(0, 0, 0, 0.1);
@@ -106,6 +111,7 @@ body {
 
 .row {
   display: flex;
+  text-align: center;
 }
 
 .building {
@@ -114,6 +120,7 @@ body {
   width: 100%;
   margin: 15px 0;
   text-align: center;
+  text-align: justify;
 }
 
 p.text {

@@ -14,8 +14,8 @@
     <div class="parking-container">
       <label>Select a parking lot</label>
       <select id="Parking_lot">
-        <option value="Yes">Prototype Testing Parking Lot</option>
-        <option value="Yes">University of Regina Parking Lot</option>
+        <option value="Yes">University of Regina Lot 6</option>
+        <option value="Yes">University of Regina Lot 7</option>
       </select>
     </div>
 
@@ -41,28 +41,35 @@
       </li>
     </ul>
     
-
+<!-- 	<meta http-equiv="refresh" content="5"> -->
 
       <!-- This section contains the building for orientation and the parking spots along with their
       status -->
     <div class="container">
-      <div class="building"> Reference Building </div>
+      <div class="building"> Kinesiology Building </div>
 
-      <div class="row">
+
 	
 		<% lots.forEach(function(element, index) { %>
+
+		<% if ((index) % 6 == 0) { %>
+			    <div class="row">
+		<% } %>
 			<% if (element.Sensor_State == 'Rs'){ %>
-			<div class="parking_slot reserved" id = "<%= element.Sensor_ID %>" ></div>
+			<div class="parking_slot reserved" id = "<%= element.Sensor_ID %>" ><%= index+1 %></div>
 			<% } %>
 			<% if (element.Sensor_State == 'Oc'){ %>
-			<div class="parking_slot occupied" id = "<%= element.Sensor_ID %>" ></div>
+			<div class="parking_slot occupied" id = "<%= element.Sensor_ID %>" ><%= index+1 %></div>
 			<% } %>
 			<% if (element.Sensor_State == 'Av'){ %>
-			<div class="parking_slot"  id = "<%= element.Sensor_ID %>"></div>
+			<div class="parking_slot"  id = "<%= element.Sensor_ID %>"><%= index+1 %></div>
 			<% } %>
+			<% if ((index) % 6 == 5) { %>
+				</div>
+		<% } %>
 		<% }) %>
-		
-      </div>
+
+
 
     </div>
 
