@@ -165,6 +165,7 @@ def read_sql():
 def commit_sql(Va, Vb, Vc, x, wack):
     # Commit statement that commits into the table the values that we currently have, in format PS_ID, PS_DT, PS_ST
     # Where PS_ID is Parking Spot ID, PS_DT is Date/time, and PS_ST is Parking Spot State
+    #Where Vc is the state that is being sent from the MC, and the x is the current state in the MySQL
     values = (Va, Vb, Vc)
     CommitStatement = "REPLACE INTO ", t[0].strip("'"), " (Sensor_ID, Timestamp, Sensor_State) VALUES (%s, %s, %s)"
     CommitStatement = ''.join(CommitStatement)
@@ -172,6 +173,7 @@ def commit_sql(Va, Vb, Vc, x, wack):
     if 'Rs' in x:
         print("This spot is reserved. Sending reserved signal out towards to the device for 4 seconds.")
         Obj = dc.get_connection()
+        Vc = "Rs"
         # print("Ping is: ", Obj.ping())  # Shows the ping for the response
 
         if '00:13:A2:00:41:A0:49:8A' in wack:
@@ -184,7 +186,7 @@ def commit_sql(Va, Vb, Vc, x, wack):
                 Obj.post("/ws/sci", OutMes)
                 print("Sending Rs Message...Iteration:", Tz)
                 time.sleep(.5)
-
+                
     myCursor.execute(CommitStatement, values)
     myDB.commit()
     print("Updating MySQL Record")
