@@ -173,7 +173,6 @@ def commit_sql(Va, Vb, Vc, x, wack):
     if 'Rs' in x:
         print("This spot is reserved. Sending reserved signal out towards to the device for 4 seconds.")
         Obj = dc.get_connection()
-        Vc = "Rs"
         # print("Ping is: ", Obj.ping())  # Shows the ping for the response
 
         if '00:13:A2:00:41:A0:49:8A' in wack:
