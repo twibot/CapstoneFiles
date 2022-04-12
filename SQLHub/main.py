@@ -1,11 +1,27 @@
+################################################################################################
+#
+#  File Name: main.py
+#  Last Edit Date: April 7th 2022
+#
+#  Author: Jake (Peixi) Yi
+#  Description:
+#  Code for processing information from microcontrollers to the MySQL database
+#  Logic takes information, parses it, and determines what to do with it depending on what is required
+#  States are always updated per loop, and information is always re-acquired at the beginning
+#  of a loop so it runs in real time processing. Transmissions are constantly happening, but 
+#  The data never increases in size in the databse, as it overrides.
+#  See in-line comments for more details
+################################################################################################
+
+
 from devicecloud import DeviceCloud
 import mysql.connector
 import base64
 import time
 # import pandas as pd
 
-UserN = "jakenardo@gmail.com"
-PassW = "Apples123"
+UserN = "jakenardo@gmail.com"   # User for Device Cloud
+PassW = "Apples123"             # Password for device cloud, not my actual password
 
 try:
     dc = DeviceCloud(UserN, PassW)
