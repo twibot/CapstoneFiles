@@ -1,3 +1,13 @@
+################################################################################################
+#
+#  File Name: Main.py
+#
+#
+#  Author: James Li
+#  Description: Main file for the indoor detection device
+#
+################################################################################################
+
 #Library on the ESP32 for PIN, UART and Real Time Clocks
 from machine import Pin, UART, RTC
 #Hex to Str Library
@@ -32,6 +42,13 @@ response = ubinascii.unhexlify('5273')
 
 #Turns on Green Led indicator initially to display parking spot is available
 ledGreen.value(1)
+
+################################################################################################
+#
+#  Description: Checks for presence of a vehicle and sends appropriate message to communication
+#               device based on findings
+#
+################################################################################################
 
 def localDetection():
     
@@ -89,6 +106,13 @@ def localDetection():
         uart1.write('Av')
         #uart1.write(timestamp1)
         print('No Vehicles Detected')
+################################################################################################
+#
+#  Description: Checks for presence of a message from the gateway server, depending on response
+#               If there is message (reserved), go into a 20 second loop, in the loop it will 
+#               check for the presence of vehicles. Loop will exit upon presence of vehicle
+#               or the loop expiring. 
+################################################################################################
 
 def webtodevice():
     
@@ -114,5 +138,4 @@ def webtodevice():
 while True:
     localDetection()
     webtodevice()
-    sleep(1)
 
